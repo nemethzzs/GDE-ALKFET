@@ -1,2 +1,2 @@
 # GDE-ALKFET
-Alkalmazás fejlesztési technologiák
+Alkalmazás fejlesztési technologiák.
