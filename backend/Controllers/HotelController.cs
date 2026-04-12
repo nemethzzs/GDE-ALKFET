@@ -29,21 +29,36 @@ namespace backend.Controllers
         [HttpPost("foglal")]
         public async Task<IActionResult> Foglal([FromBody] FoglalRequest req)
         {
-            await _service.Foglal(req.Szobaszam, req.Datum);
-            return Ok();
+            try
+            {
+                await _service.Foglal(req.Szobaszam, req.VendegNev, req.Datum);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("torles")]
         public async Task<IActionResult> Torles(int szobaszam, DateTime datum)
         {
-            await _service.Torles(szobaszam, datum);
-            return Ok();
+            try
+            {
+                await _service.Torles(szobaszam, datum);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 
     public class FoglalRequest
     {
         public int Szobaszam { get; set; }
+        public string VendegNev { get; set; }
         public DateTime Datum { get; set; }
     }
 }

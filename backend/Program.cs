@@ -1,5 +1,7 @@
 using backend.Services;
+using System.Threading.Tasks;
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -16,6 +18,11 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var mongo = scope.ServiceProvider.GetRequiredService<MongoService>();
+    await mongo.SeedSzobak();
+}
 app.UseCors("allowAll");
 // Configure the HTTP request pipeline.
 

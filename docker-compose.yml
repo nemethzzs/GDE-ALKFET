@@ -17,3 +17,12 @@ services:
       - "5000:8080"
     depends_on:
       - mongo
+
+  frontend:
+    image: node:20
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    command: sh -c "npm install && npx ng serve --host 0.0.0.0 --port 4200"
+    ports:
+      - "4200:4200"

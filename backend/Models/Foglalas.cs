@@ -11,6 +11,8 @@ namespace backend.Models
 
         public int Szobaszam { get; set; }
 
+        public string VendegNev { get; set; } = "";
+
         public DateTime Datum { get; set; }
 
         public int Ar { get; set; }

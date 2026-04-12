@@ -22,8 +22,12 @@ namespace backend.Services
             return await _mongo.Foglalasok.Find(_ => true).ToListAsync();
         }
 
-        public async Task Foglal(int szobaszam, DateTime datum)
+        // ✅ JAVÍTVA: vendegNev bekerült
+        public async Task Foglal(int szobaszam, string vendegNev, DateTime datum)
         {
+            if (string.IsNullOrWhiteSpace(vendegNev))
+                throw new Exception("A vendég neve kötelező!");
+
             if (datum.Date < DateTime.Today)
                 throw new Exception("A foglalás dátuma nem lehet múltbeli!");
 
@@ -44,6 +48,7 @@ namespace backend.Services
             await _mongo.Foglalasok.InsertOneAsync(new Foglalas
             {
                 Szobaszam = szobaszam,
+                VendegNev = vendegNev, 
                 Datum = datum,
                 Ar = szoba.Ar
             });
@@ -56,8 +61,6 @@ namespace backend.Services
 
             if (result.DeletedCount == 0)
                 throw new Exception("Nincs ilyen foglalás!");
-
-            return;
         }
     }
 }
