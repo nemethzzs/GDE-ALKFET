@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    container_name: backend
+    ports:
+      - "5000:80"
+    depends_on:
+      - mongo
