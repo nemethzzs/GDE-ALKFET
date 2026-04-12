@@ -1,0 +1,14 @@
+# build mappák
+bin/
+obj/
+
+# IDE
+.idea/
+.vscode/
+
+# logok
+*.log
+
+# régi python fájlok
+oop-szalloda.py
+adatok.txt
