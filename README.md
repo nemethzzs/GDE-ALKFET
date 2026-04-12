@@ -1,35 +1,84 @@
-# Szálloda Szobafoglalási Rendszer
+# Hotel DevOps Project
 
-Ez a projekt egy egyszerű szálloda szobafoglalási rendszert valósít meg Python nyelven. A rendszer lehetővé teszi szobák foglalását, foglalások lemondását és a foglalások listázását.
+Ez a projekt egy egyszeru szallodai foglalasi rendszer backend + DevOps alapokkal.
 
-# Funkciók
+## Projekt celja
 
-- **Szoba Foglalás**: Szobák foglalása előre megadott dátumra.
-- **Foglalás Lemondása**: Már meglévő foglalások lemondása.
-- **Foglalások Listázása**: Az összes aktuális foglalás kilistázása; ha nincs aktív foglalás, ezt jelzi a felhasználónak.
-- **Dátum Kezelés**: A foglalási dátumok megadásakor a hónapok szöveges formátumban is megadhatóak (pl. "május").
+A cel egy modern, kontenerizalt alkalmazas letrehozasa, amely:
 
-# Telepítés
+- REST API-n keresztul kezeli a szobakat es foglalasokat
+- MongoDB adatbazist hasznal
+- Dockerben futtathato
+- Kesobb Kubernetes + ArgoCD kornyezetben deployolhato
 
-A program futtatásához Python 3.6 vagy újabb verzió szükséges. A program függőségektől mentes, így közvetlenül futtatható.
+## Hasznalt technologiak
 
-1. Klónozd a repót a lokális gépedre:
-2. git clone https://github.com/zsoooti96/OOP-szalloda.git
-3. Lépj be a projekt könyvtárába:
+- Backend: ASP.NET Core Web API (.NET 8)
+- Adatbazis: MongoDB
+- Kontenerizacio: Docker, Docker Compose
+- API dokumentacio: Swagger (OpenAPI)
 
- # Használat
+## Funkcionalitas
 
-A program elindításához futtasd a következő parancsot a projekt gyökérkönyvtárában:
-python szalloda_foglalas.py
+A rendszer kepes:
 
+- Szobak lekerdezesere
+- Foglalasok listazasara
+- Uj foglalas letrehozasara
+- Foglalas torlesere
 
-Kövesd a konzolon megjelenő utasításokat a foglalások kezeléséhez.
+## API vegpontok
 
+| Method | Endpoint | Leiras |
+|--------|---------|--------|
+| GET | /api/hotel/szobak | Szobak listazasa |
+| GET | /api/hotel/foglalasok | Foglalasok listazasa |
+| POST | /api/hotel/foglal | Uj foglalas |
+| DELETE | /api/hotel/torles | Foglalas torlese |
 
+## Futtatas lokalisan
 
-# Szerző
+### Backend inditasa
 
-- Név: Magyar Zsolt János
-- GitHub: https://github.com/zsoooti96/
+cd backend
+dotnet run
 
+Swagger elerheto:
+http://localhost:5005/swagger
+
+## Docker futtatas
+
+A projekt tartalmaz docker-compose.yml fajlt:
+
+docker compose up --build
+
+Ez elinditja:
+- MongoDB
+- Backend API
+
+Swagger:
+http://localhost:5000/swagger
+
+## Projekt struktura
+
+OOP-szalloda/
+│
+├-- backend/
+│   ├-- Controllers/
+│   ├-- Models/
+│   ├-- Services/
+│   └-- Program.cs
+│
+├-- docker/
+│   └-- backend/
+│       └-- Dockerfile
+│
+├-- docker-compose.yml
+
+## Fejlesztesi workflow
+
+- main → stabil verzio
+- Dev → aktiv fejlesztes
+
+Minden uj fejlesztes a Dev branch-be kerul.
 
