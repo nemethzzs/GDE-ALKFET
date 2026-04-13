@@ -2,6 +2,9 @@
 
 Ez a projekt egy egyszeru szallodai foglalasi rendszer backend + DevOps alapokkal.
 
+### A fejlesztésben résztvevő személyek neve: 
+### Vörös Attila Hunor , Magyar Zsolt János , Erdélyi Péter István , Németh Zoltán Zsolt
+
 ## Projekt celja
 
 A cel egy modern, kontenerizalt alkalmazas letrehozasa, amely:
