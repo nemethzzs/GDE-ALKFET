@@ -83,5 +83,5 @@ OOP-szalloda/
 - main → stabil verzio
 - Dev → aktiv fejlesztes
 
-Minden uj fejlesztes a Dev branch-be kerul.
+Minden uj fejlesztes a Dev branch-be kerul, később main-be.
 
