@@ -1,124 +1,101 @@
-Szálloda – Fullstack és DevOps Projekt
+🏨 Hotel Management Application
+📌 Projekt áttekintés
 
-Projekt leírás
+A projekt célja egy full-stack webalkalmazás megvalósítása volt, amely bemutatja a modern fejlesztési és üzemeltetési eszközök használatát, beleértve a konténerizációt, CI/CD folyamatokat és Kubernetes alapú futtatást.
 
-Ez a projekt egy egyszerű szállodai foglalási rendszer, amely modern, konténerizált fullstack alkalmazásként lett megvalósítva.
-
-A rendszer lehetővé teszi:
-
-szobák listázását
-foglalások létrehozását
-foglalások törlését
-
-Az alkalmazás teljes egészében Docker alapú környezetben fut, CI pipeline-nal támogatva.
-
-Technológiák
-
-Frontend: Angular
-Backend: ASP.NET (C#)
-Adatbázis: MongoDB
-Konténerizáció: Docker, Docker Compose
-CI/CD: GitHub Actions
-Container Registry: GitHub Container Registry (GHCR)
-Orchestration: Kubernetes, ArgoCD
-
-Architektúra
-
-A rendszer három fő komponensből áll:
-
-Frontend (Angular, NGINX-en keresztül kiszolgálva)
-Backend (ASP.NET REST API)
-MongoDB adatbázis (perzisztens tárolással)
-
-A komponensek külön Docker konténerekben futnak, és docker-compose segítségével egyetlen paranccsal elindíthatók.
-
-Telepítés
-Repository klónozása
-git clone https://github.com/nemethzzs/GDE-ALKFET.git
-cd GDE-ALKFET
-
-Indítás
-
-docker compose pull
-docker compose up
-
-Elérés
-
-Frontend: http://localhost:4200
-Backend API: http://localhost:5000
-
-CI pipeline
-
-A projekt tartalmaz egy GitHub Actions alapú CI pipeline-t.
-
-A pipeline:
-
-automatikusan lefut minden dev branch-re történő push esetén
-buildeli a backend és frontend Docker image-eket
-feltölti az image-eket a GitHub Container Registry-be
-
-Ez biztosítja a verziózott és reprodukálható build folyamatot.
-
-Docker működés
-
-A rendszer production jelleggel működik:
-
-nincs lokális build futtatás
-a docker-compose közvetlenül a registry-ből húzza az image-eket
-a frontend buildelt állapotban, NGINX segítségével fut
-a backend külön konténerben API-ként működik
-
-Adatkezelés
-
-MongoDB Docker volume használatával
-az adatok nem vesznek el a konténer újraindítása után
-Seed logika
-
-A backend automatikusan feltölti az adatbázist szobákkal:
-
-összesen 50 szoba kerül létrehozásra
-a seed csak akkor fut le, ha az adatbázis üres
-így elkerülhető a duplikáció és az adatvesztés
-
-Funkciók
-
-foglalás létrehozása
-foglalás validáció
-duplikált foglalás tiltása
-foglalás törlés
-egyszerű Angular felhasználói felület
-
-A fejlesztésben résztvevő személyek
-
-Vörös Attila Hunor
+👨‍💻 Fejlesztési feladatok megoszlása
 Magyar Zsolt János
-Erdélyi Péter István
+
+A projekt során én raktam le a rendszer alapjait.
+
+Megvalósítottam a teljes frontend és backend alkalmazást, ahol az Angular alapú felhasználói felület kommunikál az ASP.NET alapú REST API-val.
+
+A rendszer képes:
+
+foglalások létrehozására
+foglalások listázására
+foglalások törlésére
+
+Kialakítottam a kezdeti Docker környezetet is, ahol:
+
+külön konténerben fut a frontend
+külön konténerben fut a backend
+külön konténerben fut a MongoDB
+
+A docker-compose segítségével a teljes rendszer egyetlen paranccsal indíthatóvá vált.
+
+Ez az architektúra biztos alapot nyújtott a későbbi CI/CD és DevOps bővítésekhez.
+
 Németh Zoltán Zsolt
 
-Felelősségi körök
+A projektben a DevOps és CI részért voltam felelős.
 
-Magyar Zsolt János – frontend és backend fejlesztés
-Németh Zoltán Zsolt – CI pipeline, Docker, deployment, GitHub Container Registry integráció
-Vörös Attila Hunor – MongoDB perzisztencia, seed logika
-Erdélyi Péter István – Kubernetes és ArgoCD megvalósítás
-Kisebb hibajavítások, kivételkezelések – közösen
+A meglévő Docker alapokra építve kialakítottam egy GitHub Actions alapú CI pipeline-t, amely minden dev és main branch-re történő push esetén:
 
-Projekt cél
+buildeli a frontend és backend Docker image-eket
+feltölti azokat a GitHub Container Registry-be (GHCR)
 
-A cél egy teljes end-to-end rendszer létrehozása volt, amely lefedi:
+A docker-compose konfigurációt is átalakítottam:
 
-az alkalmazás fejlesztését
-a konténerizációt
-a CI pipeline kialakítását
-és a futtatható deploymentet
+megszüntettem a lokális buildet
+a rendszer már a registry-ből húzza az image-eket
 
-Összegzés
+Ennek eredményeként a teljes alkalmazás:
 
-A projekt egy egyszerű üzleti logikát valósít meg, de modern fejlesztési és üzemeltetési eszközökkel.
+reprodukálható módon futtatható
+deployment-kész állapotba került
+CI/CD szemlélet szerint működik
 
-A rendszer:
+A frontend production buildként NGINX segítségével kerül kiszolgálásra, míg a backend külön konténerben API-ként fut.
 
-automatizált
-reprodukálható
-konténerizált
-és könnyen telepíthető
+Vörös Attila Hunor
+
+A projekt során a backend adatkezelési részével foglalkoztam.
+
+Megvalósítottam a MongoDB perzisztens működését Docker volume használatával, amely biztosítja, hogy az adatok megmaradjanak a konténerek újraindítása után is.
+
+Kialakítottam a seed logikát is:
+
+az adatbázis automatikusan feltöltődik egy előre definiált szoba listával
+a folyamat csak akkor fut le, ha az adatbázis üres
+ezáltal elkerülhető a duplikáció
+Emellett alap validációk is beépítésre kerültek, például a duplikált foglalások kiszűrésére.
+
+Ennek eredményeként a rendszer:
+
+stabilan működik
+konzisztens adatállapotot biztosít
+újraindítás után is ugyanabból az állapotból folytatódik
+Erdélyi Péter István
+
+A projekt Kubernetes alapú futtatásához elkészítettem a teljes deploy környezetet.
+
+Létrehoztam a szükséges Kubernetes manifest fájlokat, amelyek külön kezelik:
+
+a frontend működését
+a backend működését
+a hozzájuk tartozó service-eket
+
+A backend konfigurációját úgy alakítottam ki, hogy a MongoDB-hez klaszteren belüli DNS névvel csatlakozzon.
+
+Az adatbázis telepítése modern módon történt:
+
+MongoDB Helm chart segítségével került telepítésre
+nem manuális installációval
+
+A teljes rendszer egy lokális Kubernetes klaszteren (Minikube) került tesztelésre.
+
+🚀 Futtatás (Docker Compose)
+git clone https://github.com/nemethzzs/GDE-ALKFET.git
+cd GDE-ALKFET
+docker compose up -d
+☸️ Kubernetes futtatás
+kubectl apply -f k8s/app/
+📌 Összegzés
+
+A projekt egy teljesen működő, konténerizált webalkalmazás, amely:
+
+full-stack architektúrát valósít meg
+Docker alapú futtatást biztosít
+CI/CD pipeline-t használ
+Kubernetes környezetben is deployolható
