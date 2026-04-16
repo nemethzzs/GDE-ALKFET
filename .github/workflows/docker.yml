@@ -22,14 +22,14 @@ jobs:
 
       # BACKEND
       - name: Build backend
-        run: docker build -t ghcr.io/${{ github.repository }}/backend:latest -f docker/backend/Dockerfile .
+        run: docker build -t ghcr.io/${{ github.repository_owner }}/gde-alkfet-backend:latest -f docker/backend/Dockerfile .
 
       - name: Push backend
-        run: docker push ghcr.io/${{ github.repository }}/backend:latest
+        run: docker push ghcr.io/${{ github.repository_owner }}/gde-alkfet-backend:latest
 
       # FRONTEND
       - name: Build frontend
-        run: docker build -t ghcr.io/${{ github.repository }}/frontend:latest ./frontend
+        run: docker build -t ghcr.io/${{ github.repository_owner }}/gde-alkfet-frontend:latest ./frontend
 
       - name: Push frontend
-        run: docker push ghcr.io/${{ github.repository }}/frontend:latest
+        run: docker push ghcr.io/${{ github.repository_owner }}/gde-alkfet-frontend:latest
