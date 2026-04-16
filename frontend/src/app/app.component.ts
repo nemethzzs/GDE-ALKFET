@@ -13,14 +13,16 @@ import { FormsModule } from '@angular/forms';
 
     <button (click)="load()">Foglalások betöltése</button>
 
-    <ul *ngIf="data">
-      <li *ngFor="let f of data">
-        Szoba: {{ f.szobaszam }} |
-        Név: {{ f.vendegNev }} |
-        Dátum: {{ f.datum }} |
-        Ár: {{ f.ar }}
-      </li>
-    </ul>
+ <ul *ngIf="data">
+  <li *ngFor="let f of data">
+    Szoba: {{ f.szobaszam }} |
+    Név: {{ f.vendegNev }} |
+    Dátum: {{ f.datum }} |
+    Ár: {{ f.ar }}
+
+    <button (click)="torol(f)"> Törlés</button>
+  </li>
+</ul>
 
     <hr>
 
@@ -63,4 +65,24 @@ foglal() {
     }
   });
 }
+torol(f: any) {
+
+  if (!confirm("Biztos törlöd?")) return;
+
+  const datum = new Date(f.datum).toISOString().split('T')[0];
+
+  this.http.delete(
+    `http://localhost:5000/api/hotel/torles?szobaszam=${f.szobaszam}&datum=${datum}`
+  ).subscribe({
+    next: () => {
+      alert("Foglalás törölve!");
+      this.load();
+    },
+    error: err => {
+      console.error(err);
+      alert("Hiba történt törléskor!");
+    }
+  });
+}
   };
+  
