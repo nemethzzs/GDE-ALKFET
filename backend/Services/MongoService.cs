@@ -23,6 +23,8 @@ namespace backend.Services
 
             if (count == 0)
             {
+                Console.WriteLine("Szobák seedelése...");
+
                 var szobak = new List<Szoba>();
 
                 for (int i = 1; i <= 50; i++)
@@ -35,6 +37,10 @@ namespace backend.Services
                 }
 
                 await Szobak.InsertManyAsync(szobak);
+            }
+            else
+            {
+                Console.WriteLine("Szobák már léteznek, seed kihagyva.");
             }
         }
     }
