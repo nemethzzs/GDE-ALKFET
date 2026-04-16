@@ -10,7 +10,7 @@ RUN npm run build
 # RUN STAGE
 FROM nginx:alpine
 
-COPY --from=build /app/dist/frontend /usr/share/nginx/html
+COPY --from=build /app/dist/frontend/browser /usr/share/nginx/html
 
 EXPOSE 80
 
