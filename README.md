@@ -66,6 +66,7 @@ Ennek eredményeként a rendszer:
 stabilan működik
 konzisztens adatállapotot biztosít
 újraindítás után is ugyanabból az állapotból folytatódik
+
 Erdélyi Péter István
 
 A projekt Kubernetes alapú futtatásához elkészítettem a teljes deploy környezetet.
